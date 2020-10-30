@@ -1,21 +1,33 @@
 <template>
   <div class="card">
     <Title title="Todo List VUE!" />
-    <p>{{ message }}</p>
+    <InputAdd :addTodos="addTodos" />
+    <p v-for="(todo, index) in todos" v-bind:key="index">
+      {{ todo.title }}
+    </p>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
 import Title from "@/components/Title";
+import InputAdd from "@/components/InputAdd";
 
 export default {
   name: "Card",
   components: {
     Title,
+    InputAdd,
   },
   data() {
-    return {};
+    return {
+      todos: [],
+    };
+  },
+  methods: {
+    addTodos(todo) {
+      this.todos = [...this.todos, todo];
+    },
   },
 };
 </script>

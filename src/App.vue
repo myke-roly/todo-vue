@@ -18,7 +18,7 @@ export default {
   box-sizing: border-box;
 }
 body {
-  background: #e1f8f0;
+  background: #f1f1e6;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
