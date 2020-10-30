@@ -1,7 +1,7 @@
 <template>
   <div class="add">
     <input type="text" v-model="value" placeholder="Add new todo..." />
-    <button v-on:click="addTodo">Add</button>
+    <button class="btn-add" v-on:click="addTodo">Add</button>
   </div>
 </template>
 
@@ -13,12 +13,13 @@ export default {
     addTodos: { type: Function },
   },
   data() {
-    return { value: "", todo: {} };
+    return { value: "", todo: {}, id: 0 };
   },
   methods: {
     addTodo() {
-      this.todo = { id: 0, title: this.value, done: false };
+      this.todo = { title: this.value, done: false };
       this.addTodos(this.todo);
+      this.value = "";
     },
   },
 };
@@ -41,9 +42,10 @@ input {
   width: 250px;
   max-width: 250px;
 }
-button {
+.btn-add {
   background: orangered;
   color: white;
   text-transform: uppercase;
+  width: 100px;
 }
 </style>

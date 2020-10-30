@@ -2,9 +2,9 @@
   <div class="card">
     <Title title="Todo List VUE!" />
     <InputAdd :addTodos="addTodos" />
-    <p v-for="(todo, index) in todos" v-bind:key="index">
-      {{ todo.title }}
-    </p>
+    <ul v-for="(todo, index) in todos" v-bind:key="index">
+      <Item :todo="todo" :toggleDone="toggleDone" />
+    </ul>
   </div>
 </template>
 
@@ -12,12 +12,14 @@
 /* eslint-disable */
 import Title from "@/components/Title";
 import InputAdd from "@/components/InputAdd";
+import Item from "@/components/Item";
 
 export default {
   name: "Card",
   components: {
     Title,
     InputAdd,
+    Item,
   },
   data() {
     return {
@@ -26,7 +28,17 @@ export default {
   },
   methods: {
     addTodos(todo) {
-      this.todos = [...this.todos, todo];
+      this.todos = [...this.todos, { ...todo, id: this.todos.length }];
+    },
+
+    toggleDone(id) {
+      const changeState = this.todos.map((todo) => {
+        if (id === todo.id) {
+          return { ...todo, done: !todo.done };
+        } else return todo;
+      });
+
+      this.todos = changeState;
     },
   },
 };
