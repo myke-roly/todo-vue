@@ -35,6 +35,8 @@ export default {
 <style scoped>
 .add {
   margin: 2rem 0;
+  display: flex;
+  gap: 0.5rem;
 }
 input,
 button {
@@ -43,16 +45,16 @@ button {
   border: none;
   border-radius: 4px;
   border: 1px solid transparent;
+  font-size: 1rem;
 }
 input {
   border-color: #cccccc;
-  width: 250px;
-  max-width: 250px;
+  width: 75%;
 }
 .btn-add {
+  width: 25%;
   background: orangered;
   color: white;
   text-transform: uppercase;
-  width: 100px;
 }
 </style>

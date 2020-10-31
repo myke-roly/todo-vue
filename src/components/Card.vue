@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     addTodos(todo) {
-      this.todos = [...this.todos, { ...todo, id: this.todos.length }];
+      this.todos = [...this.todos, { ...todo, id: this.todos.length + 1 }];
     },
 
     deleteTodo(id) {
@@ -63,10 +63,10 @@ export default {
 
 <style scoped>
 .card {
-  max-width: 960px;
+  max-width: 860px;
   margin: auto;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 4rem;
   background: #fff;
   min-height: 100vh;
 }
