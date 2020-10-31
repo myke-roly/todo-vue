@@ -2,7 +2,7 @@
   <li class="item">
     {{ todo.id }} - {{ todo.title }}
     <section>
-      <button v-on:click="toggle" v-bind:class="todo.done && 'done'">
+      <button v-on:click="toggleDone" v-bind:class="todo.done && 'done'">
         {{ todo.done }}
       </button>
       <button class="edit" @click="toggleEditInput">
@@ -13,8 +13,19 @@
       </button>
     </section>
     <div v-if="isEdit" class="modal-edit">
-      <input type="text" />
-      <button @click="toggleEditInput"><i class="fas fa-times"></i></button>
+      <input
+        type="text"
+        v-model="updateTitle"
+        @keypress.enter="editTitle"
+        ref="inputEdit"
+        placeholder="Ingrese un titulo"
+      />
+      <button class="btn-close" @click="toggleEditInput">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="btn-ok" @click="editTitle">
+        <i class="fas fa-check"></i>
+      </button>
     </div>
   </li>
 </template>
@@ -23,23 +34,31 @@
 /*eslint-disable*/
 export default {
   data() {
-    return { isEdit: false };
+    return { isEdit: false, updateTitle: "" };
   },
   props: {
     todo: { type: Object },
   },
   methods: {
-    toggle() {
+    toggleDone() {
       this.$emit("toggle-done", this.todo.id);
     },
     deleteTodo() {
       this.$emit("delete-todo", this.todo.id);
     },
-    editTodo() {
-      this.$emit("edit-todo", id, updateTitle);
+    editTitle() {
+      if (!this.updateTitle) return;
+      this.$emit("edit-todo", this.todo.id, this.updateTitle);
+      this.toggleEditInput();
+      this.updateTitle = "";
     },
     toggleEditInput() {
       this.isEdit = !this.isEdit;
+      setTimeout(() => {
+        if (this.$refs.inputEdit) {
+          this.$refs.inputEdit.focus();
+        }
+      }, 500);
     },
   },
 };
@@ -97,7 +116,7 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  background: rgb(255, 155, 137);
+  background: rgb(245, 151, 134);
   height: 100%;
   width: 300px;
   display: flex;
@@ -105,30 +124,37 @@ export default {
   align-content: center;
   border-radius: 4px;
   padding: 0.7rem 1rem;
-  box-shadow: 0 0 4px rgba(238, 73, 23, 0.712);
+  box-shadow: 0 0 4px rgba(139, 40, 10, 0.507);
   animation: toLeft 0.3s;
 }
 .modal-edit input,
 .modal-edit button {
   padding: 0.4rem;
-  border-radius: 4px;
   background: transparent;
-  color: white;
   border: none;
 }
 .modal-edit input {
-  /* background: #cecece; */
-  border: 1px solid #ffffffab;
+  border-bottom: 1px solid rgb(212, 212, 212);
+  color: #ffffff;
   width: 100%;
+  letter-spacing: 1px;
+  outline: none;
+}
+.modal-edit input::placeholder {
+  color: rgb(212, 212, 212);
+}
+.modal-edit .btn-close {
+  color: rgb(255, 4, 4);
+}
+.modal-edit .btn-ok {
+  color: rgb(161, 236, 91);
 }
 @keyframes toLeft {
   from {
     transform: translateX(100%);
-    /* width: 0px; */
   }
   to {
     transform: translateX(0);
-    /* width: auto; */
   }
 }
 </style>
