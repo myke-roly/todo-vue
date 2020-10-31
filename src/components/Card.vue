@@ -1,9 +1,14 @@
 <template>
   <div class="card">
     <Title title="Todo List VUE!" />
-    <InputAdd :addTodos="addTodos" />
+    <InputAdd :add-todos="addTodos" />
     <ul v-for="(todo, index) in todos" v-bind:key="index">
-      <Item :todo="todo" :toggleDone="toggleDone" />
+      <Item
+        :todo="todo"
+        v-on:toggle-done="toggleDone"
+        v-on:delete-todo="deleteTodo"
+        v-on:edit-todo="editTodo"
+      />
     </ul>
   </div>
 </template>
@@ -29,6 +34,18 @@ export default {
   methods: {
     addTodos(todo) {
       this.todos = [...this.todos, { ...todo, id: this.todos.length }];
+    },
+
+    deleteTodo(id) {
+      this.todos = this.todos.filter((todo) => todo.id !== id);
+    },
+
+    editTodo(id, updateTitle) {
+      this.todos = this.todos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, title: updateTitle };
+        } else return todo;
+      });
     },
 
     toggleDone(id) {

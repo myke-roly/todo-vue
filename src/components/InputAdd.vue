@@ -1,6 +1,11 @@
 <template>
   <div class="add">
-    <input type="text" v-model="value" placeholder="Add new todo..." />
+    <input
+      type="text"
+      v-model="value"
+      placeholder="Add new todo..."
+      @keypress.enter="addTodo"
+    />
     <button class="btn-add" v-on:click="addTodo">Add</button>
   </div>
 </template>
@@ -17,7 +22,9 @@ export default {
   },
   methods: {
     addTodo() {
+      if (!this.value) return;
       this.todo = { title: this.value, done: false };
+      this.$emit("add-todos", this.todo);
       this.addTodos(this.todo);
       this.value = "";
     },

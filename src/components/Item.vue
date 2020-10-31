@@ -5,22 +5,41 @@
       <button v-on:click="toggle" v-bind:class="todo.done && 'done'">
         {{ todo.done }}
       </button>
-      <button class="delete">Delete</button>
-      <button class="edit">Edit</button>
+      <button class="edit" @click="toggleEditInput">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button class="delete" @click="deleteTodo">
+        <i class="fas fa-trash"></i>
+      </button>
     </section>
+    <div v-if="isEdit" class="modal-edit">
+      <input type="text" />
+      <button @click="toggleEditInput"><i class="fas fa-times"></i></button>
+    </div>
   </li>
 </template>
 
 <script>
 /*eslint-disable*/
 export default {
+  data() {
+    return { isEdit: false };
+  },
   props: {
     todo: { type: Object },
-    toggleDone: { type: Function },
   },
   methods: {
     toggle() {
-      this.toggleDone(this.todo.id);
+      this.$emit("toggle-done", this.todo.id);
+    },
+    deleteTodo() {
+      this.$emit("delete-todo", this.todo.id);
+    },
+    editTodo() {
+      this.$emit("edit-todo", id, updateTitle);
+    },
+    toggleEditInput() {
+      this.isEdit = !this.isEdit;
     },
   },
 };
@@ -34,11 +53,13 @@ export default {
   gap: 2rem;
   font-size: 1.2rem;
   text-transform: capitalize;
-  background: rgba(218, 218, 218, 0.356);
+  background: rgba(233, 233, 233, 0.356);
   padding: 0.8rem 1.5rem;
-  width: 80%;
-  margin: 0.7rem auto;
+  width: 75%;
+  margin: 1rem auto;
   border-radius: 7px;
+  position: relative;
+  overflow: hidden;
 }
 .item button {
   padding: 0.2rem 1rem;
@@ -48,16 +69,66 @@ export default {
   background: rgb(142, 133, 224);
   cursor: pointer;
   outline: none;
-  box-shadow: 0 0 2px rgb(196, 196, 196);
   margin-left: 0.5rem;
+  font-size: 1em;
+  transition: all 0.3s ease;
 }
 .item .done {
+  box-shadow: 0 0 2px rgb(196, 196, 196);
   background: rgb(139, 231, 102);
 }
 .item .delete {
-  background: rgb(236, 67, 67);
+  background: transparent;
+  color: rgb(236, 67, 67);
 }
 .item .edit {
-  background: rgb(212, 204, 116);
+  background: transparent;
+  color: rgb(212, 204, 116);
+}
+.edit,
+.delete {
+  font-size: 1em;
+}
+.edit:hover,
+.delete:hover {
+  transform: scale(1.3);
+}
+.modal-edit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: rgb(255, 155, 137);
+  height: 100%;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 4px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 0 4px rgba(238, 73, 23, 0.712);
+  animation: toLeft 0.3s;
+}
+.modal-edit input,
+.modal-edit button {
+  padding: 0.4rem;
+  border-radius: 4px;
+  background: transparent;
+  color: white;
+  border: none;
+}
+.modal-edit input {
+  /* background: #cecece; */
+  border: 1px solid #ffffffab;
+  width: 100%;
+}
+@keyframes toLeft {
+  from {
+    transform: translateX(100%);
+    /* width: 0px; */
+  }
+  to {
+    transform: translateX(0);
+    /* width: auto; */
+  }
 }
 </style>
