@@ -1,10 +1,18 @@
 <template>
   <li class="item">
-    {{ todo.id }} - {{ todo.title }}
-    <section>
-      <button v-on:click="toggleDone" v-bind:class="todo.done && 'done'">
-        {{ todo.done }}
+    <span>
+      <button
+        v-on:click="toggleDone"
+        v-bind:class="todo.done && 'done-ok'"
+        class="done"
+      >
+        <i
+          v-bind:class="todo.done ? 'fas fa-thumbs-up' : 'fas fa-thumbs-down'"
+        ></i>
       </button>
+      {{ todo.title }}
+    </span>
+    <section>
       <button class="edit" @click="showModal">
         <i class="fas fa-edit"></i>
       </button>
@@ -62,7 +70,7 @@ export default {
   align-items: center;
   font-size: 1.1em;
   text-transform: capitalize;
-  background: rgba(233, 233, 233, 0.356);
+  background: rgb(241, 241, 241);
   padding: 0.8rem 1.5rem;
   width: 100%;
   margin: 1rem auto;
@@ -72,31 +80,33 @@ export default {
   animation: down 0.5s ease;
 }
 .item button {
-  padding: 0.2rem 1rem;
-  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
   color: white;
   border: none;
-  background: rgb(142, 133, 224);
   cursor: pointer;
   outline: none;
   margin-left: 0.5rem;
-  font-size: 1em;
   transition: all 0.3s ease;
 }
 .item .done {
-  box-shadow: 0 0 2px rgb(196, 196, 196);
-  background: rgb(139, 231, 102);
+  border-radius: 4px;
+  font-size: 0.8em;
+  background: rgb(165, 154, 214);
+  margin-right: 0.5rem;
+}
+.item .done-ok {
+  font-size: 0.8em;
+  background: rgb(150, 212, 125);
 }
 .item .delete {
-  background: transparent;
-  color: rgb(236, 67, 67);
+  color: rgb(240, 133, 133);
 }
 .item .edit {
-  background: transparent;
-  color: rgb(212, 204, 116);
+  color: rgb(78, 162, 167);
 }
 .edit,
 .delete {
+  background: transparent !important;
   font-size: 1em;
 }
 .edit:hover,
