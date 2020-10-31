@@ -4,6 +4,7 @@
       type="text"
       v-model="newTitle"
       @keypress.enter="editTitle"
+      @keyup.esc="editTitle"
       @blur="hidden"
       ref="inputEdit"
       placeholder="Ingrese un titulo"
@@ -11,9 +12,9 @@
     <button class="btn-close" @click="hidden">
       <i class="fas fa-times"></i>
     </button>
-    <button class="btn-ok" @click="editTitle">
+    <!-- <button class="btn-ok" @click="editTitle">
       <i class="fas fa-check"></i>
-    </button>
+    </button> -->
   </div>
 </template>
 
@@ -51,15 +52,15 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  background: rgb(245, 151, 134);
+  background: rgb(43, 43, 43);
   height: 100%;
-  width: 300px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
   border-radius: 4px;
   padding: 0.7rem 1rem;
-  box-shadow: 0 0 4px rgba(139, 40, 10, 0.507);
+  box-shadow: 0 0 4px rgb(27, 27, 27);
   animation: toLeft 0.3s;
 }
 .modal-edit input,
@@ -86,10 +87,12 @@ export default {
 }
 @keyframes toLeft {
   from {
-    transform: translateX(100%);
+    opacity: 0;
+    width: 0;
   }
   to {
-    transform: translateX(0);
+    width: 100%;
+    opacity: 1;
   }
 }
 </style>

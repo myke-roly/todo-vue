@@ -70,4 +70,9 @@ export default {
   background: #fff;
   min-height: 100vh;
 }
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1rem;
+  }
+}
 </style>

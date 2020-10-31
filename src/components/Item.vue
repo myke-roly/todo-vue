@@ -1,17 +1,16 @@
 <template>
   <li class="item">
-    <span>
+    <p>
       <button
         v-on:click="toggleDone"
         v-bind:class="todo.done && 'done-ok'"
         class="done"
       >
-        <i
-          v-bind:class="todo.done ? 'fas fa-thumbs-up' : 'fas fa-thumbs-down'"
-        ></i>
+        <i v-if="todo.done" class="fas fa-thumbs-up"></i>
+        <i v-else class="fas fa-thumbs-down"></i>
       </button>
-      {{ todo.title }}
-    </span>
+      <span v-bind:class="todo.done && 'title-done'">{{ todo.title }}</span>
+    </p>
     <section>
       <button class="edit" @click="showModal">
         <i class="fas fa-edit"></i>
@@ -60,13 +59,6 @@ export default {
       this.isEditing = false;
     },
   },
-  updated() {
-    document.addEventListener("keyup", (e) => {
-      if (e.which) {
-        this.hiddenModal();
-      }
-    });
-  },
 };
 </script>
 
@@ -83,8 +75,10 @@ export default {
   margin: 1rem auto;
   border-radius: 7px;
   position: relative;
-  overflow: hidden;
   animation: down 0.5s ease;
+}
+.item .title-done {
+  text-decoration: line-through;
 }
 .item button {
   padding: 0.2rem 0.5rem;
@@ -95,30 +89,30 @@ export default {
   margin-left: 0.5rem;
   transition: all 0.3s ease;
 }
+.item button:hover {
+  transform: scale(1.2);
+}
 .item .done {
   border-radius: 4px;
   font-size: 0.8em;
   background: rgb(165, 154, 214);
   margin-right: 0.5rem;
+  transform: scale(1.1);
 }
 .item .done-ok {
   font-size: 0.8em;
   background: rgb(150, 212, 125);
 }
 .item .delete {
-  color: rgb(240, 133, 133);
+  color: rgb(0, 0, 0);
 }
 .item .edit {
-  color: rgb(78, 162, 167);
+  color: rgb(131, 131, 131);
 }
 .edit,
 .delete {
   background: transparent !important;
   font-size: 1em;
-}
-.edit:hover,
-.delete:hover {
-  transform: scale(1.3);
 }
 @keyframes down {
   from {
