@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <Title title="Todo List VUE!" />
+    <Title title="Todo List!" />
     <InputAdd :add-todos="addTodos" />
     <ul v-for="(todo, index) in todos" v-bind:key="index">
       <Item

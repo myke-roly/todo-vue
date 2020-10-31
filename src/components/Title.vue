@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ title }}</h1>
+  <h1><img src="../assets/logo.png" alt="logo" /> {{ title }}</h1>
 </template>
 
 <script>
@@ -17,5 +17,9 @@ h1 {
   text-transform: uppercase;
   text-align: center;
   margin-top: 1rem;
+}
+
+h1 img {
+  width: 30px;
 }
 </style>

@@ -60,6 +60,13 @@ export default {
       this.isEditing = false;
     },
   },
+  updated() {
+    document.addEventListener("keyup", (e) => {
+      if (e.which) {
+        this.hiddenModal();
+      }
+    });
+  },
 };
 </script>
 
