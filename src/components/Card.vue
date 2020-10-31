@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card bg-gray-200">
     <Title title="Todo List!" />
     <InputAdd :add-todos="addTodos" />
     <ul v-for="(todo, index) in todos" v-bind:key="index">

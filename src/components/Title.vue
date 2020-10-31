@@ -1,6 +1,7 @@
 <template>
-  <h1 class="bg-blue-300 text-center">
-    <img src="../assets/logo.png" alt="logo" /> {{ title }}
+  <h1 class="text-center flex justify-center items-center">
+    <img src="../assets/logo.png" class="w-8 mr-5" alt="logo" />
+    <span class="text-2xl uppercase">{{ title }}</span>
   </h1>
 </template>
 
@@ -11,13 +12,3 @@ export default {
   props: ["title"],
 };
 </script>
-
-<style scoped>
-h1 {
-  font-size: 2.5rem;
-}
-
-h1 img {
-  width: 30px;
-}
-</style>

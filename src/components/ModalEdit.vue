@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isEditing" class="modal-edit">
+  <div v-if="isEditing" class="modal-edit bg-gray-800">
     <input
       type="text"
       v-model="newTitle"
@@ -9,7 +9,7 @@
       ref="inputEdit"
       placeholder="Ingrese un titulo"
     />
-    <button class="btn-close" @click="hidden">
+    <button class="text-red-400" @click="hidden">
       <i class="fas fa-times"></i>
     </button>
     <!-- <button class="btn-ok" @click="editTitle">
@@ -52,25 +52,24 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  background: rgb(43, 43, 43);
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
   border-radius: 4px;
-  padding: 0.7rem 1rem;
-  box-shadow: 0 0 4px rgb(27, 27, 27);
+  padding: 0.7rem;
+  /* box-shadow: 0 0 4px rgb(27, 27, 27); */
   animation: toLeft 0.3s;
 }
 .modal-edit input,
 .modal-edit button {
-  padding: 0.4rem;
   background: transparent;
+  padding: 0 0.5rem;
   border: none;
 }
 .modal-edit input {
-  border-bottom: 1px solid rgb(212, 212, 212);
+  border-bottom: 1px solid rgb(128, 128, 128);
   color: #ffffff;
   width: 100%;
   letter-spacing: 1px;

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="bg-blue-400">
+  <div id="app" class="bg-gray-200">
     <router-view />
   </div>
 </template>
@@ -19,6 +19,7 @@ export default {
 }
 body {
   background: #f1f1e6;
+  font-size: 16px;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

@@ -1,12 +1,18 @@
 <template>
-  <div class="add">
+  <div class="flex gap-2 my-10">
     <input
+      class="px-4 py-2 flex-auto bg-gray-300 focus:outline-none border rounded border-gray-400 focus-within:bg-gray text-gray-600"
       type="text"
       v-model="value"
       placeholder="Add new todo..."
       @keypress.enter="addTodo"
     />
-    <button class="btn-add" v-on:click="addTodo">Add</button>
+    <button
+      class="flex-auto rounded text-white uppercase bg-gray-800 hover:bg-gray-900 font-semibold"
+      v-on:click="addTodo"
+    >
+      Add
+    </button>
   </div>
 </template>
 
@@ -31,30 +37,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.add {
-  margin: 2rem 0;
-  display: flex;
-  gap: 0.5rem;
-}
-input,
-button {
-  padding: 0.7rem 1rem;
-  background: none;
-  border: none;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  font-size: 1rem;
-}
-input {
-  border-color: #cccccc;
-  width: 75%;
-}
-.btn-add {
-  width: 25%;
-  background: orangered;
-  color: white;
-  text-transform: uppercase;
-}
-</style>

@@ -1,22 +1,23 @@
 <template>
-  <li class="item">
+  <li
+    class="item bg-gray-100 flex justify-between items-center px-4 py-3 my-5 capitalize rounded"
+  >
     <p>
       <button
         v-on:click="toggleDone"
-        v-bind:class="todo.done && 'done-ok'"
-        class="done"
+        v-bind:class="todo.done ? 'text-green-400' : 'text-blue-400'"
       >
         <i v-if="todo.done" class="fas fa-thumbs-up"></i>
         <i v-else class="fas fa-thumbs-down"></i>
       </button>
-      <span v-bind:class="todo.done && 'title-done'">{{ todo.title }}</span>
+      <span v-bind:class="todo.done && 'line-through'">- {{ todo.title }}</span>
     </p>
     <section>
-      <button class="edit" @click="showModal">
-        <i class="fas fa-edit"></i>
+      <button class="text-green-300" @click="showModal">
+        <i class="far fa-edit"></i>
       </button>
-      <button class="delete" @click="deleteTodo">
-        <i class="fas fa-trash"></i>
+      <button class="text-red-400" @click="deleteTodo">
+        <i class="far fa-trash-alt"></i>
       </button>
     </section>
     <ModalEdit
@@ -64,26 +65,12 @@ export default {
 
 <style>
 .item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 1.1em;
-  text-transform: capitalize;
-  background: rgb(241, 241, 241);
-  padding: 0.8rem 1.5rem;
   width: 100%;
-  margin: 1rem auto;
-  border-radius: 7px;
   position: relative;
   animation: down 0.5s ease;
 }
-.item .title-done {
-  text-decoration: line-through;
-}
 .item button {
-  padding: 0.2rem 0.5rem;
-  color: white;
-  border: none;
   cursor: pointer;
   outline: none;
   margin-left: 0.5rem;
@@ -91,28 +78,6 @@ export default {
 }
 .item button:hover {
   transform: scale(1.2);
-}
-.item .done {
-  border-radius: 4px;
-  font-size: 0.8em;
-  background: rgb(165, 154, 214);
-  margin-right: 0.5rem;
-  transform: scale(1.1);
-}
-.item .done-ok {
-  font-size: 0.8em;
-  background: rgb(150, 212, 125);
-}
-.item .delete {
-  color: rgb(0, 0, 0);
-}
-.item .edit {
-  color: rgb(131, 131, 131);
-}
-.edit,
-.delete {
-  background: transparent !important;
-  font-size: 1em;
 }
 @keyframes down {
   from {
