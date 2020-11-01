@@ -1,12 +1,12 @@
 <template>
   <div class="card bg-gray-200">
-    <Title title="Todo List!" />
-    <InputAdd :add-todos="addTodos" />
+    <card-title title="Todo List!" />
+    <input-add :add-todos="addTodos" />
     <ul v-for="(todo, index) in todos" v-bind:key="index">
-      <Item
+      <item
         :todo="todo"
-        v-on:toggle-done="toggleDone"
-        v-on:delete-todo="deleteTodo"
+        v-on:toggle-done="toggleDone(todo.id)"
+        v-on:delete-todo="deleteTodo(todo.id)"
         v-on:edit-todo="editTodo"
       />
     </ul>
@@ -15,14 +15,14 @@
 
 <script>
 /* eslint-disable */
-import Title from "@/components/Title";
+import CardTitle from "@/components/Title";
 import InputAdd from "@/components/InputAdd";
 import Item from "@/components/Item";
 
 export default {
   name: "Card",
   components: {
-    Title,
+    CardTitle,
     InputAdd,
     Item,
   },

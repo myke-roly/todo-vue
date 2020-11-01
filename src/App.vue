@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="bg-gray-200">
+  <div id="app" class="container mx-auto min-h-screen bg-gray-200">
     <router-view />
   </div>
 </template>
@@ -18,7 +18,6 @@ export default {
   box-sizing: border-box;
 }
 body {
-  background: #f1f1e6;
   font-size: 16px;
 }
 #app {

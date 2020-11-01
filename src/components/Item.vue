@@ -45,10 +45,10 @@ export default {
   },
   methods: {
     toggleDone() {
-      this.$emit("toggle-done", this.todo.id);
+      this.$emit("toggle-done");
     },
     deleteTodo() {
-      this.$emit("delete-todo", this.todo.id);
+      this.$emit("delete-todo");
     },
     editTitle(newTitle) {
       this.$emit("edit-todo", this.todo.id, newTitle);

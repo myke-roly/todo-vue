@@ -8,7 +8,7 @@
 <script>
 /*eslint-disable*/
 export default {
-  name: "Title",
+  name: "CardTitle",
   props: ["title"],
 };
 </script>
