@@ -1,16 +1,17 @@
 <template>
   <li
-    class="item bg-gray-100 flex justify-between items-center px-4 py-3 my-5 capitalize rounded"
+    class="item bg-white flex justify-between items-center px-4 py-3 my-5 capitalize rounded"
   >
     <p>
+      <b>{{ newIndex }}</b>
+      <span v-bind:class="todo.done && 'line-through'">- {{ todo.title }}</span>
       <button
         v-on:click="toggleDone"
-        v-bind:class="todo.done ? 'text-green-400' : 'text-blue-400'"
+        v-bind:class="todo.done ? 'text-green-400' : 'text-blue-700'"
       >
         <i v-if="todo.done" class="fas fa-thumbs-up"></i>
         <i v-else class="fas fa-thumbs-down"></i>
       </button>
-      <span v-bind:class="todo.done && 'line-through'">- {{ todo.title }}</span>
     </p>
     <section>
       <button class="text-green-300" @click="showModal">
@@ -42,6 +43,12 @@ export default {
   },
   props: {
     todo: { type: Object },
+    index: { type: Number },
+  },
+  computed: {
+    newIndex() {
+      return this.index + 1;
+    },
   },
   methods: {
     toggleDone() {
@@ -81,9 +88,11 @@ export default {
 }
 @keyframes down {
   from {
-    transform: translateY(-100%);
+    transform: translateY(100%);
+    opacity: 0;
   }
   to {
+    opacity: 0.8;
     transform: translateX(0);
   }
 }

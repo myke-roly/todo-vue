@@ -1,12 +1,13 @@
 <template>
-  <div class="card bg-gray-200">
+  <div class="card bg-gray-100">
     <card-title title="Todo List!" />
     <input-add :add-todos="addTodos" />
-    <p class="text-center text-blue-400" v-if="todos.length === 0">
+    <p class="text-center text-gray-700" v-if="todos.length === 0">
       Aun no creaste ninguna tarea!
     </p>
     <ul v-for="(todo, index) in todos" v-bind:key="index">
       <item
+        :index="index"
         :todo="todo"
         v-on:toggle-done="toggleDone(todo.id)"
         v-on:delete-todo="deleteTodo(todo.id)"
@@ -47,7 +48,7 @@ export default {
   },
   methods: {
     addTodos(todo) {
-      this.todos = [...this.todos, { ...todo, id: this.todos.length + 1 }];
+      this.todos = [...this.todos, { ...todo }];
       setStorage(this.todos);
     },
 
@@ -86,7 +87,6 @@ export default {
   margin: auto;
   text-align: center;
   padding: 2rem 4rem;
-  background: #fff;
   min-height: 100vh;
 }
 @media (max-width: 480px) {
