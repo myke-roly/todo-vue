@@ -5,14 +5,20 @@
     <p class="text-center text-gray-700" v-if="todos.length === 0">
       Aun no creaste ninguna tarea!
     </p>
-    <ul v-for="(todo, index) in todos" v-bind:key="index">
-      <item
-        :index="index"
-        :todo="todo"
-        v-on:toggle-done="toggleDone(todo.id)"
-        v-on:delete-todo="deleteTodo(todo.id)"
-        v-on:edit-todo="editTodo"
-      />
+    <ul class="list__items">
+      <li
+        class="list__item bg-white rounded px-4 py-3 my-5"
+        v-for="(todo, index) in todos"
+        v-bind:key="index"
+      >
+        <item
+          :index="index"
+          :todo="todo"
+          v-on:toggle-done="toggleDone(todo.id)"
+          v-on:delete-todo="deleteTodo(todo.id)"
+          v-on:edit-todo="editTodo"
+        />
+      </li>
     </ul>
     <button
       v-if="todos.length > 0"
@@ -46,9 +52,14 @@ export default {
   created() {
     this.todos = getStorage();
   },
+  computed: {
+    reverseData() {
+      return this.todos.reverse();
+    },
+  },
   methods: {
     addTodos(todo) {
-      this.todos = [...this.todos, { ...todo }];
+      this.todos = [{ ...todo }, ...this.todos];
       setStorage(this.todos);
     },
 
@@ -89,9 +100,22 @@ export default {
   padding: 2rem 4rem;
   min-height: 100vh;
 }
+.card ul li:first-child {
+  animation: down 0.5s ease;
+}
 @media (max-width: 480px) {
   .card {
     padding: 2rem 1rem;
+  }
+}
+@keyframes down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
+    transform: translateX(0);
   }
 }
 </style>

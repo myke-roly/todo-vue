@@ -1,7 +1,5 @@
 <template>
-  <li
-    class="item bg-white flex justify-between items-center px-4 py-3 my-5 capitalize rounded"
-  >
+  <div class="flex justify-between items-center capitalize">
     <p>
       <b>{{ newIndex }}</b>
       <span v-bind:class="todo.done && 'line-through'">- {{ todo.title }}</span>
@@ -27,7 +25,7 @@
       :title="todo.title"
       :isEditing="isEditing"
     />
-  </li>
+  </div>
 </template>
 
 <script>
@@ -75,9 +73,8 @@ export default {
   font-size: 1.1em;
   width: 100%;
   position: relative;
-  animation: down 0.5s ease;
 }
-.item button {
+.itembutton {
   cursor: pointer;
   outline: none;
   margin-left: 0.5rem;
@@ -85,15 +82,5 @@ export default {
 }
 .item button:hover {
   transform: scale(1.2);
-}
-@keyframes down {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    opacity: 0.8;
-    transform: translateX(0);
-  }
 }
 </style>
