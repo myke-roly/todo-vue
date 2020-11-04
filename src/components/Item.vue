@@ -1,5 +1,7 @@
 <template>
-  <div class="flex justify-between items-center capitalize">
+  <div
+    class="item flex justify-between items-center capitalize px-4 py-3 my-4 bg-white rounded"
+  >
     <p>
       <b>{{ newIndex }}</b>
       <span v-bind:class="todo.done && 'line-through'">- {{ todo.title }}</span>
@@ -33,6 +35,7 @@
 import ModalEdit from "./ModalEdit";
 
 export default {
+  name: "Item",
   data() {
     return { isEditing: false };
   },
@@ -73,8 +76,9 @@ export default {
   font-size: 1.1em;
   width: 100%;
   position: relative;
+  animation: down 1s ease !important;
 }
-.itembutton {
+.item button {
   cursor: pointer;
   outline: none;
   margin-left: 0.5rem;
@@ -82,5 +86,15 @@ export default {
 }
 .item button:hover {
   transform: scale(1.2);
+}
+@keyframes down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 </style>
