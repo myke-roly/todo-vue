@@ -13,7 +13,7 @@
         <i v-else class="fas fa-thumbs-down"></i>
       </button>
     </p>
-    <section>
+    <section class="w-40">
       <button class="text-green-300" @click="showModal">
         <i class="far fa-edit"></i>
       </button>
