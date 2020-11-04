@@ -19,7 +19,7 @@
     <button
       v-if="todos.length > 0"
       @click="deleteTodos"
-      class="py-1 px-4 text-gray-200 float-right bg-red-400 rounded hove:bg-red-400"
+      class="py-1 px-4 mb-10 text-gray-200 float-right bg-red-400 rounded hover:bg-red-500"
     >
       Delete All
     </button>
