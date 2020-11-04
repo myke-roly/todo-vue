@@ -1,6 +1,8 @@
 <template>
   <div class="card bg-gray-100">
-    <card-title title="Todo List!" />
+    <navbar :all="all" :solved="solved" :unsolved="unsolved">
+      <card-title title="Todo List!" />
+    </navbar>
     <input-add :add-todos="addTodos" />
     <p class="text-center text-gray-700" v-if="todos.length === 0">
       Aun no creaste ninguna tarea!
@@ -31,6 +33,7 @@
 import CardTitle from "@/components/Title";
 import InputAdd from "@/components/InputAdd";
 import Item from "@/components/Item";
+import Navbar from "@/components/Navbar";
 import { setStorage, getStorage, deleteStorage } from "@/helpers/localStorage";
 
 export default {
@@ -39,14 +42,25 @@ export default {
     CardTitle,
     InputAdd,
     Item,
+    Navbar,
   },
   data() {
     return {
       todos: [],
+      solved: 0,
+      unsolved: 0,
+      all: 0,
     };
   },
   created() {
     this.todos = getStorage();
+    this.all = this.todos.length;
+  },
+  updated() {
+    setStorage(this.todos);
+    this.all = this.todos.length;
+    this.solved = this.todos.filter((todo) => todo.done).length;
+    this.unsolved = this.todos.filter((todo) => !todo.done).length;
   },
   computed: {
     reverseData() {
@@ -56,12 +70,12 @@ export default {
   methods: {
     addTodos(todo) {
       this.todos = [{ ...todo }, ...this.todos];
-      setStorage(this.todos);
+      // setStorage(this.todos);
     },
 
     deleteTodo(id) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
-      setStorage(this.todos);
+      // setStorage(this.todos);
     },
 
     editTodo(id, updateTitle) {
@@ -70,7 +84,7 @@ export default {
           return { ...todo, title: updateTitle };
         } else return todo;
       });
-      setStorage(this.todos);
+      // setStorage(this.todos);
     },
     deleteTodos() {
       this.todos = [];
@@ -82,7 +96,7 @@ export default {
           return { ...todo, done: !todo.done };
         } else return todo;
       });
-      setStorage(this.todos);
+      // setStorage(this.todos);
     },
   },
 };
