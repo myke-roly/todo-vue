@@ -69,22 +69,17 @@ export default {
   },
   methods: {
     addTodos(todo) {
-      this.todos = [{ ...todo }, ...this.todos];
-      // setStorage(this.todos);
+      this.todos = [...this.todos, { ...todo }];
     },
-
     deleteTodo(id) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
-      // setStorage(this.todos);
     },
-
     editTodo(id, updateTitle) {
       this.todos = this.todos.map((todo) => {
         if (todo.id === id) {
           return { ...todo, title: updateTitle };
         } else return todo;
       });
-      // setStorage(this.todos);
     },
     deleteTodos() {
       this.todos = [];
@@ -96,7 +91,6 @@ export default {
           return { ...todo, done: !todo.done };
         } else return todo;
       });
-      // setStorage(this.todos);
     },
   },
 };
