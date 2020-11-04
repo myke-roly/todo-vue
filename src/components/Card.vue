@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     addTodos(todo) {
-      this.todos = [{ ...todo }, ...this.todos];
+      this.todos = [...this.todos, { ...todo }];
       setStorage(this.todos);
     },
 
