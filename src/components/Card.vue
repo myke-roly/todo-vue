@@ -34,7 +34,14 @@ import CardTitle from "@/components/Title";
 import InputAdd from "@/components/InputAdd";
 import Item from "@/components/Item";
 import Navbar from "@/components/Navbar";
-import { setStorage, getStorage, deleteStorage } from "@/helpers/localStorage";
+import {
+  setStorage,
+  getStorage,
+  deleteStorage,
+  todosSolveds,
+  todosUnsolveds,
+  todosLength,
+} from "@/helpers/localStorage";
 
 export default {
   name: "Card",
@@ -46,15 +53,11 @@ export default {
   },
   data() {
     return {
-      todos: [],
-      solved: 0,
-      unsolved: 0,
-      all: 0,
+      todos: getStorage(),
+      solved: todosSolveds(),
+      unsolved: todosUnsolveds(),
+      all: todosLength(),
     };
-  },
-  created() {
-    this.todos = getStorage();
-    this.all = this.todos.length;
   },
   updated() {
     setStorage(this.todos);
