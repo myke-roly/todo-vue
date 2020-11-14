@@ -4,17 +4,19 @@
   >
     <p>
       <b>{{ newIndex }}</b>
-      <span v-bind:class="todo.done && 'line-through'">- {{ todo.title }}</span>
       <button
         v-on:click="toggleDone"
-        v-bind:class="todo.done ? 'text-green-400' : 'text-blue-700'"
+        v-bind:class="todo.done ? 'text-blue-400' : 'text-red-400'"
       >
         <i v-if="todo.done" class="fas fa-thumbs-up"></i>
         <i v-else class="fas fa-thumbs-down"></i>
       </button>
+      <span v-bind:class="todo.done && 'line-through opacity-25'"
+        >- {{ todo.title }}</span
+      >
     </p>
     <section class="w-20">
-      <button class="text-green-300" @click="showModal">
+      <button class="text-green-400" @click="showModal">
         <i class="far fa-edit"></i>
       </button>
       <button class="text-red-400" @click="deleteTodo">
