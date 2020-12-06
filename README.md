@@ -1,10 +1,13 @@
-# todo-app-vue
+# TODO VUE APP
+[Live](https://todo-vue-rose.vercel.app/#/)
+
+First simple app created in Vue and tailwind. With this app you can save a list of task
 
 > A Vue.js project
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 

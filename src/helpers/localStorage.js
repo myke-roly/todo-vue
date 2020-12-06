@@ -1,12 +1,12 @@
 const nameStorage = 'todo_vue'
-const todos = JSON.parse(localStorage.getItem(nameStorage))
+const todos = JSON.parse(localStorage.getItem(nameStorage)) || []
 
 export function setStorage (data) {
   localStorage.setItem(nameStorage, JSON.stringify(data))
 }
 
 export function getStorage () {
-  return todos || []
+  return todos
 }
 
 export function todosSolveds () {
@@ -19,7 +19,7 @@ export function todosUnsolveds () {
 
 export function todosLength () {
   return todos.length
-};
+}
 
 export function deleteStorage () {
   localStorage.removeItem(nameStorage)
